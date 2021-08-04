@@ -3,11 +3,9 @@ using System;
 
 namespace Monefy.Model.Expences
 {
-    class HealthExpence : IExpence
+    public class HealthExpence : Expence
     {
-        public double TotalSum { get; set; }
-        public DateTime ExecutionDate { get; set; }
-        public Expence ExpenceType { get; set; }
+
 
         public HealthExpence() : this(0) { }
 
@@ -15,7 +13,6 @@ namespace Monefy.Model.Expences
         {
             TotalSum = sum;
             ExecutionDate = DateTime.Now;
-            ExpenceType = Expence.healthExpence;
         }
     }
 }

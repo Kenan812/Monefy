@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Monefy.Model.Expences
 {
-    class TransportExpence : IExpence
+    public class TransportExpence : Expence
     {
-        public double TotalSum { get; set; }
-        public DateTime ExecutionDate { get; set; }
-        public Expence ExpenceType { get; set; }
 
         public TransportExpence() : this(0) { }
 
@@ -19,7 +16,6 @@ namespace Monefy.Model.Expences
         {
             TotalSum = sum;
             ExecutionDate = DateTime.Now;
-            ExpenceType = Expence.transportExpence;
         }
     }
 }

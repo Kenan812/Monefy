@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 
 namespace Monefy.Model.Expences
 {
-    class SportsExpence : IExpence
+    public class SportsExpence : Expence
     {
-        public double TotalSum { get; set; }
-        public DateTime ExecutionDate { get; set; }
-        public Expence ExpenceType { get; set; }
-
         public SportsExpence() : this(0) { }
 
         public SportsExpence(double sum)
         {
             TotalSum = sum;
             ExecutionDate = DateTime.Now;
-            ExpenceType = Expence.sportsExpence;
         }
     }
 }

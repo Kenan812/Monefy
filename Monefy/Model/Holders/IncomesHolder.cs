@@ -1,4 +1,4 @@
-﻿using Monefy.Model.Income;
+﻿using Monefy.Model.Incomes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +9,15 @@ namespace Monefy.Model.Holders
 {
     public class IncomesHolder
     {
-        private List<List<IIncome>> allIncomes = new List<List<IIncome>>();
+        public List<List<Income>> allIncomes{ get; set; }
 
         public IncomesHolder()
         {
-            List<IIncome> depositIncome = new List<IIncome>();
-            List<IIncome> salaryIncome = new List<IIncome>();
-            List<IIncome> savingsIncome = new List<IIncome>();
+            allIncomes = new List<List<Income>>();
+
+            List<Income> depositIncome = new List<Income>();
+            List<Income> salaryIncome = new List<Income>();
+            List<Income> savingsIncome = new List<Income>();
 
             allIncomes.Add(depositIncome);
             allIncomes.Add(salaryIncome);
@@ -35,12 +37,12 @@ namespace Monefy.Model.Holders
 
         public void AddSalaryIncome(double sum)
         {
-            allIncomes[0].Add(new SalaryIncome(sum));
+            allIncomes[1].Add(new SalaryIncome(sum));
         }
 
         public void AddSavingsIncome(double sum)
         {
-            allIncomes[0].Add(new SavingsIncome(sum));
+            allIncomes[2].Add(new SavingsIncome(sum));
         }
 
 

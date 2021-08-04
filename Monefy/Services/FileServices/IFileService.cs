@@ -1,4 +1,6 @@
 ﻿using Monefy.Model;
+using Monefy.Model.Expences;
+using Monefy.Model.Incomes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,13 @@ namespace Monefy.Services.FileServices
 
     public interface IFileService
     {
-        User LoadUserInformation(string filename);
+        void SaveExpences(string filename, List<List<Expence>> expences);
 
-        void SaveUserInformation(string filename, User user);
+        List<List<Expence>> LoadExpences(string filename);
 
+
+        void SaveIncomes(string filename, List<List<Income>> incomes);
+
+        List<List<Income>> LoadIncomes(string filename);
     }
 }

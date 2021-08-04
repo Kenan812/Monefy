@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Monefy.Model.Income
+namespace Monefy.Model.Incomes
 {
-    class SalaryIncome : IIncome
+    public class SalaryIncome : Income
     {
-        public double TotalIncome { get; set; }
-        public DateTime ExecutionDate { get; set; }
-
         public SalaryIncome() : this(0) { }
 
         public SalaryIncome(double sum)

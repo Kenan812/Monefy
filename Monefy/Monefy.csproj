@@ -61,11 +61,11 @@
     <Compile Include="Model\Expences\CommunicationsExpence.cs" />
     <Compile Include="Model\Expences\EatingOutExpence.cs" />
     <Compile Include="Model\Expences\EntertainmentExpence.cs" />
+    <Compile Include="Model\Expences\Expence.cs" />
     <Compile Include="Model\Expences\FoodExpence.cs" />
     <Compile Include="Model\Expences\GiftsExpence.cs" />
     <Compile Include="Model\Expences\HealthExpence.cs" />
     <Compile Include="Model\Expences\HouseExpence.cs" />
-    <Compile Include="Model\Expences\IExpence.cs" />
     <Compile Include="Model\Expences\PetsExpence.cs" />
     <Compile Include="Model\Expences\SportsExpence.cs" />
     <Compile Include="Model\Expences\TaxiExpence.cs" />
@@ -73,10 +73,10 @@
     <Compile Include="Model\Expences\TransportExpence.cs" />
     <Compile Include="Model\Holders\ExpencesHolder.cs" />
     <Compile Include="Model\Holders\IncomesHolder.cs" />
-    <Compile Include="Model\Income\DepositIncome.cs" />
-    <Compile Include="Model\Income\IIncome.cs" />
-    <Compile Include="Model\Income\SalaryIncome.cs" />
-    <Compile Include="Model\Income\SavingsIncome.cs" />
+    <Compile Include="Model\Incomes\DepositIncome.cs" />
+    <Compile Include="Model\Incomes\Income.cs" />
+    <Compile Include="Model\Incomes\SalaryIncome.cs" />
+    <Compile Include="Model\Incomes\SavingsIncome.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Services\Command.cs" />
     <Compile Include="Services\CommandDelegates\DelegateCommand.cs" />

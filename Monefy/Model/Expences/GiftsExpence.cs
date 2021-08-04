@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 
 namespace Monefy.Model.Expences
 {
-    class GiftsExpence : IExpence
+    public class GiftsExpence : Expence
     {
-        public double TotalSum { get; set; }
-        public DateTime ExecutionDate { get; set; }
-        public Expence ExpenceType { get; set; }
-
+        
         public GiftsExpence() : this(0) { }
 
         public GiftsExpence(double sum)
         {
             TotalSum = sum;
             ExecutionDate = DateTime.Now;
-            ExpenceType = Expence.giftsExpence;
         }
     }
 }

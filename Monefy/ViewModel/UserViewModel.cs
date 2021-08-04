@@ -29,11 +29,18 @@ namespace Monefy.ViewModel
         {
             _fileService = fileService;
 
-            if (File.Exists("user.xml"))
+            if (File.Exists("expences.xml"))
             {
-                MessageBox.Show("Test");
-                user = _fileService.LoadUserInformation("user.xml");
+                user.ExpencesHolder.allExpences = _fileService.LoadExpences("expences.xml");
             }
+
+            if (File.Exists("incomes.xml"))
+            {
+                user.IncomesHolder.allIncomes = _fileService.LoadIncomes("incomes.xml");
+            }
+
+            SetListForAllPeriods();
+            SetPercentagesExpences();
         }
 
 
@@ -182,6 +189,7 @@ namespace Monefy.ViewModel
             {
                 toietryExpencePercentage = value;
                 OnPropertyChanged(nameof(ToietryExpencePercentage));
+               // MessageBox.Show($"{toietryExpencePercentage}");
             }
         }
 
@@ -217,9 +225,9 @@ namespace Monefy.ViewModel
                 OnPropertyChanged(nameof(TotalIncome));
             }
         }
+
+
         private List<double> totalIncomePerCategory = new List<double>();
-
-
 
 
 
@@ -238,9 +246,14 @@ namespace Monefy.ViewModel
 
 
 
-        public void SaveUser()
+        public void SaveUserExpences()
         {
-            _fileService.SaveUserInformation("user.xml", user);
+            _fileService.SaveExpences("expences.xml", user.ExpencesHolder.allExpences);
+        }
+
+        public void SaveUserIncomes()
+        {
+            _fileService.SaveIncomes("incomes.xml", user.IncomesHolder.allIncomes);
         }
 
 
@@ -591,6 +604,7 @@ namespace Monefy.ViewModel
 
         private void SetListForAllPeriods()
         {
+
             totalExpencePerCategory = user.ExpencesHolder.GetAllExpences();
             totalIncomePerCategory = user.IncomesHolder.GetAllIncome();
         }
@@ -618,6 +632,7 @@ namespace Monefy.ViewModel
                     totalExpence += totalExpencePerCategory[i];
                 }
 
+
                 CarExpencePercentage = ( Math.Round((totalExpencePerCategory[0] / totalExpence), 2) * 100).ToString();
                 ClothesExpencePercentage = (Math.Round((totalExpencePerCategory[1] / totalExpence), 2) * 100).ToString();
                 CommunicationExpencePercentage = (Math.Round((totalExpencePerCategory[2] / totalExpence), 2) * 100).ToString();
@@ -632,6 +647,7 @@ namespace Monefy.ViewModel
                 TaxiExpencePercentage = (Math.Round((totalExpencePerCategory[11] / totalExpence), 2) * 100).ToString();
                 ToietryExpencePercentage = (Math.Round((totalExpencePerCategory[12] / totalExpence), 2) * 100).ToString();
                 TransportExpencePercentage = (Math.Round((totalExpencePerCategory[13] / totalExpence), 2) * 100).ToString();
+
             }
             catch (Exception ex)
             {

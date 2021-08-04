@@ -7,25 +7,27 @@ namespace Monefy.Model.Holders
 {
     public class ExpencesHolder
     {
-        private List<List<IExpence>> allExpences = new List<List<IExpence>>();
+        public List<List<Expence>> allExpences { get; set; }
 
 
         public ExpencesHolder()
         {
-            List<IExpence> carExpences = new List<IExpence>();
-            List<IExpence> clothesExpences = new List<IExpence>();
-            List<IExpence> communicationsExpences = new List<IExpence>();
-            List<IExpence> eatingOutExpences = new List<IExpence>();
-            List<IExpence> entertainmentExpences = new List<IExpence>();
-            List<IExpence> foodExpences = new List<IExpence>();
-            List<IExpence> giftsExpences = new List<IExpence>();
-            List<IExpence> healthExpences = new List<IExpence>();
-            List<IExpence> houseExpences = new List<IExpence>();
-            List<IExpence> petsExpences = new List<IExpence>();
-            List<IExpence> sportsExpences = new List<IExpence>();
-            List<IExpence> taxiExpences = new List<IExpence>();
-            List<IExpence> toiletryExpences = new List<IExpence>();
-            List<IExpence> transportExpences = new List<IExpence>();
+            allExpences = new List<List<Expence>>();
+
+            List<Expence> carExpences = new List<Expence>();
+            List<Expence> clothesExpences = new List<Expence>();
+            List<Expence> communicationsExpences = new List<Expence>();
+            List<Expence> eatingOutExpences = new List<Expence>();
+            List<Expence> entertainmentExpences = new List<Expence>();
+            List<Expence> foodExpences = new List<Expence>();
+            List<Expence> giftsExpences = new List<Expence>();
+            List<Expence> healthExpences = new List<Expence>();
+            List<Expence> houseExpences = new List<Expence>();
+            List<Expence> petsExpences = new List<Expence>();
+            List<Expence> sportsExpences = new List<Expence>();
+            List<Expence> taxiExpences = new List<Expence>();
+            List<Expence> toiletryExpences = new List<Expence>();
+            List<Expence> transportExpences = new List<Expence>();
 
             allExpences.Add(carExpences);
             allExpences.Add(clothesExpences);
@@ -42,7 +44,6 @@ namespace Monefy.Model.Holders
             allExpences.Add(toiletryExpences);
             allExpences.Add(transportExpences);
         }
-
 
 
         #region Add Expence
@@ -174,6 +175,7 @@ namespace Monefy.Model.Holders
                     totalCount += allExpences[i][j].TotalSum;
                 }
 
+                //MessageBox.Show($"{totalCount}");
                 sums.Add(totalCount);
             }
 
@@ -298,24 +300,4 @@ namespace Monefy.Model.Holders
 
 
     }
-
-
-    public enum Expence
-    {
-        carExpence = 0,
-        clothesExpence,
-        communicationExpence,
-        eatingOutExpence,
-        entertainmentExpence,
-        foodExpence,
-        giftsExpence,
-        healthExpence,
-        houseExpence,
-        petsExpence,
-        sportsExpence,
-        taxiExpence,
-        toiletryExpence,
-        transportExpence
-    }
-
 }
