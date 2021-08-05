@@ -391,6 +391,7 @@ namespace Monefy.View
             salaryImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + System.IO.Path.DirectorySeparatorChar + "Images/salaryIcon.png"));
             savingsImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + System.IO.Path.DirectorySeparatorChar + "Images/savingsIcon.png"));
 
+            cashImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + System.IO.Path.DirectorySeparatorChar + "Images/cashIcon.png"));
         }
 
 

@@ -31,7 +31,7 @@
 
 
             <Label Grid.Column="0" Name="backLabel" MouseDown="backLabel_MouseDown" Content="←" FontSize="25" FontWeight="Bold" Foreground="White" Background="LimeGreen"/>
-            <Label Grid.Column="1" Content="New Expence" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White" Background="LimeGreen"/>
+            <Label Grid.Column="1" Content="New Income" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Foreground="White" Background="LimeGreen"/>
 
 
         </Grid>

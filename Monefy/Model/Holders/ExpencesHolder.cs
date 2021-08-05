@@ -231,7 +231,7 @@ namespace Monefy.Model.Holders
             {
                 for (int j = 0; j < allExpences[i].Count; j++)
                 {
-                    if (allExpences[i][j].ExecutionDate.DayOfWeek == DateTime.Now.DayOfWeek && (DateTime.Now.DayOfYear - allExpences[i][j].ExecutionDate.DayOfYear <= 7))
+                    if (DateTime.Now.Subtract(allExpences[i][j].ExecutionDate).TotalDays <= 7)
                     {
                         sums[i] += allExpences[i][j].TotalSum;
                     }

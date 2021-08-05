@@ -23,11 +23,16 @@ namespace Monefy.ViewModel
 
         User user = new User();
 
+        public List<double> allExpences { get; set; } = new List<double>();
+        public List<double> allIncomes { get; set; } = new List<double>();
+
 
 
         public UserViewModel(IFileService fileService)
         {
             _fileService = fileService;
+            TotalExpencePerCategory = new List<double>();
+            TotalIncomePerCategory = new List<double>();
 
             if (File.Exists("expences.xml"))
             {
@@ -41,6 +46,12 @@ namespace Monefy.ViewModel
 
             SetListForAllPeriods();
             SetPercentagesExpences();
+            SetTotalIncome();
+
+            Balance = (Double.Parse(TotalIncome) - Double.Parse(TotalExpence)).ToString();
+
+            allExpences = user.ExpencesHolder.GetAllExpences();
+            allIncomes = user.IncomesHolder.GetAllIncome();
         }
 
 
@@ -209,8 +220,21 @@ namespace Monefy.ViewModel
 
 
 
-        private double totalExpence = 0;
-        private List<double> totalExpencePerCategory = new List<double>();
+        private string totalExpence;
+        public string TotalExpence
+        {
+            get => totalExpence;
+            set
+            {
+                totalExpence = value;
+                OnPropertyChanged(nameof(TotalExpence));
+            }
+        }
+
+
+        
+
+        public List<double> TotalExpencePerCategory { get; set; }
 
 
 
@@ -227,7 +251,21 @@ namespace Monefy.ViewModel
         }
 
 
-        private List<double> totalIncomePerCategory = new List<double>();
+        public List<double> TotalIncomePerCategory { get; set; }
+
+
+        private string balance;
+        public string Balance
+        {
+            get => balance;
+            set
+            {
+                balance = value;
+                OnPropertyChanged(nameof(Balance));
+            }
+        }
+
+        
 
 
 
@@ -267,7 +305,7 @@ namespace Monefy.ViewModel
             {
                 return _addCarExpenceCommand ?? (_addCarExpenceCommand = new DelegateCommand(obj =>
                     {
-                        if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddCarExpence(Double.Parse(SelectedSum));
+                        if (!String.IsNullOrEmpty(SelectedSum)) { user.ExpencesHolder.AddCarExpence(Double.Parse(SelectedSum)); Balance = ( Double.Parse(Balance) - Double.Parse( SelectedSum )).ToString(); }
                     }));
             }
         }
@@ -280,7 +318,7 @@ namespace Monefy.ViewModel
             {
                 return _addClothesExpenceCommand ?? (_addClothesExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddClothesExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddClothesExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -293,7 +331,7 @@ namespace Monefy.ViewModel
             {
                 return _addCommunicacionsExpenceCommand ?? (_addCommunicacionsExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddCommunicationExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) { user.ExpencesHolder.AddCommunicationExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -306,7 +344,7 @@ namespace Monefy.ViewModel
             {
                 return _addEatingOutExpenceCommand ?? (_addEatingOutExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddEatingOutExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddEatingOutExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -319,7 +357,7 @@ namespace Monefy.ViewModel
             {
                 return _addEntertainmentExpenceCommand ?? (_addEntertainmentExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddEntertainmentExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddEntertainmentExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -332,7 +370,7 @@ namespace Monefy.ViewModel
             {
                 return _addFoodExpenceCommand ?? (_addFoodExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddFoodExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddFoodExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -345,7 +383,7 @@ namespace Monefy.ViewModel
             {
                 return _addGiftsExpenceCommand ?? (_addGiftsExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddGiftsExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddGiftsExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -359,7 +397,7 @@ namespace Monefy.ViewModel
             {
                 return _addHealthExpenceCommand ?? (_addHealthExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddHealthExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) { user.ExpencesHolder.AddHealthExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -372,7 +410,7 @@ namespace Monefy.ViewModel
             {
                 return _addHouseExpenceCommand ?? (_addHouseExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddHouseExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddHouseExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -385,7 +423,7 @@ namespace Monefy.ViewModel
             {
                 return _addPetsExpenceCommand ?? (_addPetsExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddPetsExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddPetsExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -398,7 +436,7 @@ namespace Monefy.ViewModel
             {
                 return _addSportsExpenceCommand ?? (_addSportsExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddSportsExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddSportsExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -412,7 +450,7 @@ namespace Monefy.ViewModel
             {
                 return _addTaxiExpenceCommand ?? (_addTaxiExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddTaxiExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddTaxiExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -425,7 +463,7 @@ namespace Monefy.ViewModel
             {
                 return _addToiletryExpenceCommand ?? (_addToiletryExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddToiletryExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddToiletryExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -438,7 +476,7 @@ namespace Monefy.ViewModel
             {
                 return _addTransportExpenceCommand ?? (_addTransportExpenceCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.ExpencesHolder.AddTransportExpence(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.ExpencesHolder.AddTransportExpence(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) - Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -456,7 +494,7 @@ namespace Monefy.ViewModel
             {
                 return _addDepositIncomeCommand ?? (_addDepositIncomeCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.IncomesHolder.AddDepositIncome(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.IncomesHolder.AddDepositIncome(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) + Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -469,7 +507,7 @@ namespace Monefy.ViewModel
             {
                 return _addsalaryIncomeCommand ?? (_addsalaryIncomeCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.IncomesHolder.AddSalaryIncome(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) { user.IncomesHolder.AddSalaryIncome(Double.Parse(SelectedSum));  Balance = (Double.Parse(Balance) + Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -482,7 +520,7 @@ namespace Monefy.ViewModel
             {
                 return _addSavingsIncomeCommand ?? (_addSavingsIncomeCommand = new DelegateCommand(obj =>
                 {
-                    if (!String.IsNullOrEmpty(SelectedSum)) user.IncomesHolder.AddSavingsIncome(Double.Parse(SelectedSum));
+                    if (!String.IsNullOrEmpty(SelectedSum)) {user.IncomesHolder.AddSavingsIncome(Double.Parse(SelectedSum)); Balance = (Double.Parse(Balance) + Double.Parse(SelectedSum)).ToString(); }
                 }));
             }
         }
@@ -574,39 +612,76 @@ namespace Monefy.ViewModel
         }
 
 
-        #region Setting totalExpencePerCategory and totalIncomePerCategory For Chosen Time Interval
+
+
+        private DateTime chosenDate;
+        public DateTime ChosenDate
+        {
+            get => chosenDate;
+            set
+            {
+                chosenDate = value;
+                OnPropertyChanged(nameof(ChosenDate));
+            }
+
+        }
+
+
+        private Command _chosenDateCommand;
+        public Command ChosenDateCommand
+        {
+            get
+            {
+                return _chosenDateCommand ?? (_chosenDateCommand = new DelegateCommand(obj =>
+                {
+                    SetListForDay(ChosenDate);
+                    SetPercentagesExpences();
+                    SetTotalIncome();
+                }));
+            }
+        }
+
+
+
+        #region Setting TotalExpencePerCategory and TotalIncomePerCategory For Chosen Time Interval
 
 
 
         private void SetListForDay()
         {
-            totalExpencePerCategory = user.ExpencesHolder.GetExpencesPerOneDay(DateTime.Now);
-            totalIncomePerCategory = user.IncomesHolder.GetIncomesPerOneDay(DateTime.Now);
+            TotalExpencePerCategory = user.ExpencesHolder.GetExpencesPerOneDay(DateTime.Now);
+            TotalIncomePerCategory = user.IncomesHolder.GetIncomesPerOneDay(DateTime.Now);
+        }
+
+        private void SetListForDay(DateTime d)
+        {
+            TotalExpencePerCategory = user.ExpencesHolder.GetExpencesPerOneDay(d);
+            TotalIncomePerCategory = user.IncomesHolder.GetIncomesPerOneDay(d);
         }
 
         private void SetListForLatestWeek()
         {
-            totalExpencePerCategory = user.ExpencesHolder.GetExpencesForLatestWeek();
-            totalIncomePerCategory = user.IncomesHolder.GetIncomesForLatestWeek();
+            TotalExpencePerCategory = user.ExpencesHolder.GetExpencesForLatestWeek();
+            TotalIncomePerCategory = user.IncomesHolder.GetIncomesForLatestWeek();
         }
 
         private void SetListForLatestMonth()
         {
-            totalExpencePerCategory = user.ExpencesHolder.GetExpenceForLatestMonth();
-            totalIncomePerCategory = user.IncomesHolder.GetIncomesForLatestMonth();
+            TotalExpencePerCategory = user.ExpencesHolder.GetExpenceForLatestMonth();
+            TotalIncomePerCategory = user.IncomesHolder.GetIncomesForLatestMonth();
         }
 
         private void SetListForLatestYear()
         {
-            totalExpencePerCategory = user.ExpencesHolder.GetExpenceForLatestYear();
-            totalIncomePerCategory = user.IncomesHolder.GetIncomesForLatestYear();
+            TotalExpencePerCategory = user.ExpencesHolder.GetExpenceForLatestYear();
+            TotalIncomePerCategory = user.IncomesHolder.GetIncomesForLatestYear();
         }
 
         private void SetListForAllPeriods()
         {
 
-            totalExpencePerCategory = user.ExpencesHolder.GetAllExpences();
-            totalIncomePerCategory = user.IncomesHolder.GetAllIncome();
+            TotalExpencePerCategory = user.ExpencesHolder.GetAllExpences();
+            TotalIncomePerCategory = user.IncomesHolder.GetAllIncome();
         }
 
 
@@ -619,35 +694,52 @@ namespace Monefy.ViewModel
 
 
 
-        // Sets expence percentage for all expences taken from totalExpencePerCategory
+        // Sets expence percentage for all expences taken from TotalExpencePerCategory
         // Should be manually modified when adding new type of Expence
         private void SetPercentagesExpences()
         {
             try
             {
-                totalExpence = 0;
+                double overallExpence = 0;
 
-                for (int i = 0; i < totalExpencePerCategory.Count; i++)
+                for (int i = 0; i < TotalExpencePerCategory.Count; i++)
                 {
-                    totalExpence += totalExpencePerCategory[i];
+                    overallExpence += TotalExpencePerCategory[i];
                 }
 
 
-                CarExpencePercentage = ( Math.Round((totalExpencePerCategory[0] / totalExpence), 2) * 100).ToString();
-                ClothesExpencePercentage = (Math.Round((totalExpencePerCategory[1] / totalExpence), 2) * 100).ToString();
-                CommunicationExpencePercentage = (Math.Round((totalExpencePerCategory[2] / totalExpence), 2) * 100).ToString();
-                EatingOutExpencePercentage = (Math.Round((totalExpencePerCategory[3] / totalExpence), 2) * 100).ToString();
-                EntertainmentExpencePercentage = (Math.Round((totalExpencePerCategory[4] / totalExpence), 2) * 100).ToString();
-                FoodExpencePercentage = (Math.Round((totalExpencePerCategory[5] / totalExpence), 2) * 100).ToString();
-                GiftsExpencePercentage = (Math.Round((totalExpencePerCategory[6] / totalExpence), 2) * 100).ToString();
-                HealthExpencePercentage = (Math.Round((totalExpencePerCategory[7] / totalExpence), 2) * 100).ToString();
-                HouseExpencePercentage = (Math.Round((totalExpencePerCategory[8] / totalExpence), 2) * 100).ToString();
-                PetsExpencePercentage = (Math.Round((totalExpencePerCategory[9] / totalExpence), 2) * 100).ToString();
-                SportsExpencePercentage = (Math.Round((totalExpencePerCategory[10] / totalExpence), 2) * 100).ToString();
-                TaxiExpencePercentage = (Math.Round((totalExpencePerCategory[11] / totalExpence), 2) * 100).ToString();
-                ToietryExpencePercentage = (Math.Round((totalExpencePerCategory[12] / totalExpence), 2) * 100).ToString();
-                TransportExpencePercentage = (Math.Round((totalExpencePerCategory[13] / totalExpence), 2) * 100).ToString();
+                CarExpencePercentage = ( Math.Round((TotalExpencePerCategory[0] / overallExpence), 2) * 100).ToString() + "%";
+                ClothesExpencePercentage = (Math.Round((TotalExpencePerCategory[1] / overallExpence), 2) * 100).ToString() + "%";
+                CommunicationExpencePercentage = (Math.Round((TotalExpencePerCategory[2] / overallExpence), 2) * 100).ToString() + "%";
+                EatingOutExpencePercentage = (Math.Round((TotalExpencePerCategory[3] / overallExpence), 2) * 100).ToString() + "%";
+                EntertainmentExpencePercentage = (Math.Round((TotalExpencePerCategory[4] / overallExpence), 2) * 100).ToString() + "%";
+                FoodExpencePercentage = (Math.Round((TotalExpencePerCategory[5] / overallExpence), 2) * 100).ToString() + "%";
+                GiftsExpencePercentage = (Math.Round((TotalExpencePerCategory[6] / overallExpence), 2) * 100).ToString() + "%";
+                HealthExpencePercentage = (Math.Round((TotalExpencePerCategory[7] / overallExpence), 2) * 100).ToString() + "%";
+                HouseExpencePercentage = (Math.Round((TotalExpencePerCategory[8] / overallExpence), 2) * 100).ToString() + "%";
+                PetsExpencePercentage = (Math.Round((TotalExpencePerCategory[9] / overallExpence), 2) * 100).ToString() + "%";
+                SportsExpencePercentage = (Math.Round((TotalExpencePerCategory[10] / overallExpence), 2) * 100).ToString() + "%";
+                TaxiExpencePercentage = (Math.Round((TotalExpencePerCategory[11] / overallExpence), 2) * 100).ToString() + "%";
+                ToietryExpencePercentage = (Math.Round((TotalExpencePerCategory[12] / overallExpence), 2) * 100).ToString() + "%";
+                TransportExpencePercentage = (Math.Round((TotalExpencePerCategory[13] / overallExpence), 2) * 100).ToString() + "%";
 
+                if ( CarExpencePercentage == "NaN%" || CarExpencePercentage == "0%") CarExpencePercentage = String.Empty;
+                if (ClothesExpencePercentage == "NaN%" || ClothesExpencePercentage == "0%") ClothesExpencePercentage = String.Empty;
+                if (CommunicationExpencePercentage == "NaN%" || CommunicationExpencePercentage == "0%") CommunicationExpencePercentage = String.Empty;
+                if (EatingOutExpencePercentage == "NaN%" || EatingOutExpencePercentage == "0%") EatingOutExpencePercentage = String.Empty;
+                if (EntertainmentExpencePercentage == "NaN%" || EntertainmentExpencePercentage == "0%") EntertainmentExpencePercentage = String.Empty;
+                if (FoodExpencePercentage == "NaN%" || FoodExpencePercentage == "0%") FoodExpencePercentage = String.Empty;
+                if (GiftsExpencePercentage == "NaN%" || GiftsExpencePercentage == "0%") GiftsExpencePercentage = String.Empty;
+                if (HealthExpencePercentage == "NaN%" || HealthExpencePercentage == "0%") HealthExpencePercentage = String.Empty;
+                if (HouseExpencePercentage == "NaN%" || HouseExpencePercentage == "0%") HouseExpencePercentage = String.Empty;
+                if (PetsExpencePercentage == "NaN%" || PetsExpencePercentage == "0%") PetsExpencePercentage = String.Empty;
+                if (SportsExpencePercentage == "NaN%" || SportsExpencePercentage == "0%") SportsExpencePercentage = String.Empty;
+                if (TaxiExpencePercentage == "NaN%" || TaxiExpencePercentage == "0%") TaxiExpencePercentage = String.Empty;
+                if (ToietryExpencePercentage == "NaN%" || ToietryExpencePercentage == "0%") ToietryExpencePercentage = String.Empty;
+                if (TransportExpencePercentage == "NaN%" || TransportExpencePercentage == "0%") TransportExpencePercentage = String.Empty;
+
+
+                TotalExpence = overallExpence.ToString();
             }
             catch (Exception ex)
             {
@@ -655,18 +747,15 @@ namespace Monefy.ViewModel
             }
         }
 
-
-        // Sets expence percentage for all expences taken from totalIncomePerCategory
-        // Should be manually modified when adding new type of Income
         private void SetTotalIncome()
         {
             try
             {
                 double income = 0;
 
-                for (int i = 0; i < totalIncomePerCategory.Count; i++)
+                for (int i = 0; i < TotalIncomePerCategory.Count; i++)
                 {
-                    income += totalIncomePerCategory[i];
+                    income += TotalIncomePerCategory[i];
                 }
 
                 TotalIncome = income.ToString();
@@ -676,6 +765,7 @@ namespace Monefy.ViewModel
                 MessageBox.Show($"Message: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         protected virtual void OnPropertyChanged(string propertyName = null)

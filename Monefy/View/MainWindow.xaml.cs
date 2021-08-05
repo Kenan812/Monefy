@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -25,6 +26,8 @@ namespace Monefy.View
     public partial class MainWindow : Window
     {
         UserViewModel userViewModel;
+        Storyboard storyboard;
+
 
         public MainWindow()
         {
@@ -33,6 +36,7 @@ namespace Monefy.View
             userViewModel = new UserViewModel(new XmlFileService());
             DataContext = userViewModel;
 
+            dateLabel.Content = "All Period";
 
             ExpencesHolder eh = new ExpencesHolder();
 
@@ -65,19 +69,100 @@ namespace Monefy.View
 
 
 
+        #region intervalDateStackPanel Activator Events
+
+
         private void intervalDateLabel_MouseDown(object sender, MouseButtonEventArgs e)
         {
+
+            // Open animation
             if (intervalDateLabel.Content.ToString() == "≡")
             {
                 intervalDateLabel.Content = "←";
+
+                storyboard = new Storyboard();
+
+                DoubleAnimation da = new DoubleAnimation();
+
+                da.From = 0;
+                da.To = 120;
+
+                da.AutoReverse = false;
+                da.DecelerationRatio = 1;
+                da.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+                storyboard.Children.Add(da);
+                Storyboard.SetTargetName(da, intervalDateStackPanel.Name);
+                Storyboard.SetTargetProperty(da, new PropertyPath(StackPanel.WidthProperty));
+
+                storyboard.Begin(this);
+
+                intervalDateStackPanel.BeginAnimation(StackPanel.WidthProperty, da);
             }
+
+
+            // Close animation
             else if (intervalDateLabel.Content.ToString() == "←")
             {
                 intervalDateLabel.Content = "≡";
+
+                storyboard = new Storyboard();
+
+                DoubleAnimation da = new DoubleAnimation();
+
+                da.From = 120;
+                da.To = 0;
+
+                da.AutoReverse = false;
+                da.DecelerationRatio = 1;
+                da.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+                storyboard.Children.Add(da);
+                Storyboard.SetTargetName(da, intervalDateStackPanel.Name);
+                Storyboard.SetTargetProperty(da, new PropertyPath(StackPanel.WidthProperty));
+
+                storyboard.Begin(this);
+
+                intervalDateStackPanel.BeginAnimation(StackPanel.WidthProperty, da);
             }
 
-
         }
+
+
+        private void mainAppGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (intervalDateStackPanel.Width > 0)
+            {
+                intervalDateLabel.Content = "≡";
+
+                storyboard = new Storyboard();
+
+                DoubleAnimation da = new DoubleAnimation();
+
+                da.From = 120;
+                da.To = 0;
+
+                da.AutoReverse = false;
+                da.DecelerationRatio = 1;
+                da.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+                storyboard.Children.Add(da);
+                Storyboard.SetTargetName(da, intervalDateStackPanel.Name);
+                Storyboard.SetTargetProperty(da, new PropertyPath(StackPanel.WidthProperty));
+
+                storyboard.Begin(this);
+
+                intervalDateStackPanel.BeginAnimation(StackPanel.WidthProperty, da);
+            }
+        }
+
+
+
+        #endregion
+
+
+        #region NewExpenceButton and NewIncomeButton Click
+
 
         private void expenceButton_Click(object sender, RoutedEventArgs e)
         {
@@ -93,11 +178,53 @@ namespace Monefy.View
             newIncomeWindow.ShowDialog();
         }
 
+        #endregion
+
+
+
+
+
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             userViewModel.SaveUserExpences();
+            userViewModel.SaveUserIncomes();
+        }
 
+
+        private void chooseDayButton_Click(object sender, RoutedEventArgs e)
+        {
+            dateLabel.Content = DateTime.Today;
+        }
+
+        private void chooseWeekButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime d1 = DateTime.Today.AddDays(-7);
+            dateLabel.Content = $"{d1.Month}/{d1.Day}/{d1.Year} - {DateTime.Today.Month}/{DateTime.Today.Day}/{DateTime.Today.Year}";
+        }
+
+        private void chooseMonthButton_Click(object sender, RoutedEventArgs e)
+        {
+            double days = DateTime.Today.AddDays(-1).Day;
+            DateTime d1 = DateTime.Today.AddDays(-days);
+            dateLabel.Content = $"{d1.Month}/{d1.Day}/{d1.Year} - {DateTime.Today.Month}/{DateTime.Today.Day}/{DateTime.Today.Year}";
+        }
+
+        private void chooseYearButton_Click(object sender, RoutedEventArgs e)
+        {
+            double days = DateTime.Today.AddDays(-1).DayOfYear;
+            DateTime d1 = DateTime.Today.AddDays(-days);
+            dateLabel.Content = $"{d1.Month}/{d1.Day}/{d1.Year} - {DateTime.Today.Month}/{DateTime.Today.Day}/{DateTime.Today.Year}";
+        }
+
+        private void chooseAllIntervalButton_Click(object sender, RoutedEventArgs e)
+        {
+            dateLabel.Content = "All Period";
+        }
+
+        private void chooseAnyDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            dateLabel.Content = datePicker.SelectedDate;
         }
     }
 }

@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         xmlns:local="clr-namespace:Monefy.View"
         mc:Ignorable="d"
         Title="Monefy" Height="515" Width="300" Closing="Window_Closing">
-    
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -18,16 +19,12 @@
 
         
         <!-- Menu -->
-        <Grid Grid.Row="0" Background="LimeGreen">
+        <Grid Grid.Row="0" Background="LimeGreen" >
 
             <Grid.ColumnDefinitions>
 
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
 
             </Grid.ColumnDefinitions>
 
@@ -35,31 +32,14 @@
             <Label Name="intervalDateLabel" Grid.Column="0" Content="≡" Background="LimeGreen" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"
                    MouseDown="intervalDateLabel_MouseDown"/>
 
-
-            <Grid Grid.Column="1">
-
-                <Grid.RowDefinitions>
-
-                    <RowDefinition/>
-                    <RowDefinition/>
-
-                </Grid.RowDefinitions>
-
-                <Label Grid.Row="0" Content="Monefy" Background="LimeGreen" Foreground="White" FontSize="10" FontFamily="Verdana"/>
-                <Label Grid.Row="1" Content="All Accounts" Background="LimeGreen" Foreground="White" FontSize="10"/>
-
-            </Grid>
-
-            <Label Grid.Column="3" Content="🔍" Background="LimeGreen" Foreground="White" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"/>
-            <Label Grid.Column="4" Content="⇄" Background="LimeGreen" Foreground="White" FontSize="19" FontWeight="Bold" VerticalAlignment="Center"/>
-            <Label Grid.Column="5" Content="⋮" Background="LimeGreen" Foreground="White" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center"/>
+            <Label Grid.Column="1" Content="Monefy" Background="LimeGreen" Foreground="White" FontSize="20" FontFamily="Verdana" VerticalContentAlignment="Center"/>
 
         </Grid> <!-- Menu -->
 
         
         
         <!-- Main App -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Name="mainAppGrid" MouseDown="mainAppGrid_MouseDown">
 
 
             <!-- Main UI Panel -->
@@ -76,7 +56,7 @@
                 
                 <!-- Time Span -->
                 <Grid Grid.Row="0">
-                    <Label HorizontalAlignment="Center" FontSize="10" Content="Date"/>
+                    <Label Name="dateLabel" HorizontalAlignment="Center" FontSize="10" FontWeight="Bold" Content="Date"/>
                 </Grid> <!-- Time Span -->
 
 
@@ -147,7 +127,26 @@
                         </StackPanel>
                         
                         
-                        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="Green" Height="300" VerticalAlignment="Top"></StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="White" Height="300" VerticalAlignment="Top">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <Label Content="Income: " Foreground="LimeGreen" FontSize="14" FontWeight="Bold"/>
+                                <Label Content="{Binding TotalIncome}" Foreground="LimeGreen" FontSize="14"/>
+                                
+                            </StackPanel>
+
+
+
+                            <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+
+                                <Label Content="Expence: " Foreground="Red" FontSize="14" FontWeight="Bold"/>
+                                <Label Content="{Binding TotalExpence}" Foreground="Red" FontSize="14"/>
+
+                            </StackPanel>
+
+
+                        </StackPanel>
                         
                         
                         <StackPanel Grid.Row="1" Grid.Column="3" Height="300" VerticalAlignment="Top">
@@ -227,8 +226,8 @@
 
 
 
-                    <!-- Overall balance manipulation -->
-                    <StackPanel VerticalAlignment="Bottom" Height="34" Orientation="Vertical">
+                    <!-- Overall balance -->
+                    <StackPanel Name="balanceStackPanel" VerticalAlignment="Bottom" Height="34" Orientation="Vertical" Background="White">
 
 
                         <StackPanel>
@@ -242,60 +241,25 @@
 
                                 </Grid.ColumnDefinitions>
 
-                                <Label Name="label1" Grid.Column="0" Content="≡≡≡" FontSize="20" FontWeight="Bold" Foreground="LimeGreen" HorizontalAlignment="Center"/>
-                                <Button Name="button1" Grid.Column="1"  Content="Balance" Height="32" Margin="12,0,12,1" BorderThickness="1" BorderBrush="Green" 
-                                        Background="LimeGreen" Foreground="White" FontSize="15"/>
-                                <Label Name="label2" Grid.Column="2"  Content="≡≡≡" FontSize="20" FontWeight="Bold" Foreground="LimeGreen" HorizontalAlignment="Center"/>
+                                <Label Grid.Column="0" Content="≡≡≡" FontSize="20" FontWeight="Bold" Foreground="LimeGreen" HorizontalAlignment="Center"/>
+                                <Button Name="button1" Grid.Column="1" Height="32" Margin="12,0,12,1" BorderThickness="1" BorderBrush="Green" 
+                                        Background="LimeGreen" Foreground="White" FontSize="15">
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <Label Content="Balance" Foreground="White"/>
+                                        <Label Content="{Binding Balance}" Foreground="White"/>
+
+                                    </StackPanel>
+                                    
+                                    
+                                </Button>
+                                <Label Grid.Column="2"  Content="≡≡≡" FontSize="20" FontWeight="Bold" Foreground="LimeGreen" HorizontalAlignment="Center"/>
 
                             </Grid>
                         </StackPanel>
 
-                        
-                        <!-- Manipulations List Box -->
-                        <StackPanel>
-
-                            <ListBox Margin="0,2,0,0">
-
-                                <ListBoxItem Content="hello1"/>
-                                <ListBoxItem Content="hello2"/>
-                                <ListBoxItem Content="hello3"/>
-                                <ListBoxItem Content="hello4"/>
-                                <ListBoxItem Content="hello5"/>
-                                <ListBoxItem Content="hello6"/>
-                                <ListBoxItem Content="hello7"/>
-
-                            </ListBox>
-
-
-
-                        </StackPanel>  <!-- Manipulations List Box -->
-
-
-                        <StackPanel.Triggers>
-
-                            <EventTrigger RoutedEvent="Mouse.MouseDown" SourceName="label1">
-                                <EventTrigger.Actions>
-                                    <BeginStoryboard Name="listBoxBeginStoryBoard1">
-                                        
-                                        <Storyboard Timeline.DesiredFrameRate="100">
-                                            <DoubleAnimation Storyboard.TargetProperty="Height" DecelerationRatio="1"
-                                                             From="32" To="300" AutoReverse="False"
-                                                             Duration="0:0:0.3"/>
-                                        </Storyboard>
-                                        
-                                    </BeginStoryboard>
-                                </EventTrigger.Actions>
-                            </EventTrigger>
-
-
-                            <EventTrigger RoutedEvent="Mouse.MouseDown" SourceName="label2">
-                                <StopStoryboard BeginStoryboardName="listBoxBeginStoryBoard1"/>
-                            </EventTrigger>
-
-                        </StackPanel.Triggers>
-
-                    </StackPanel> <!-- Overall balance manipulation -->
-
+                    </StackPanel> <!-- Overall balance -->
                     
                 </Grid> <!-- Expences and Balance -->
 
@@ -357,80 +321,46 @@
                             <RowDefinition Height="1.3*"/>
                             <RowDefinition Height="1.3*"/>
                             <RowDefinition Height="1.3*"/>
-                            <RowDefinition Height="1.3*"/>
 
                         </Grid.RowDefinitions>
 
 
                         <Grid Grid.Row="0">
-                            <Button Margin="5,10,5,10" Content="All accounts"/>
+                            <Button Name="chooseDayButton" Click="chooseDayButton_Click" Margin="5,10,5,10" Content="Day" Command="{Binding DayCommand}"/>
                         </Grid>
                     
                         <Grid Grid.Row="1">
-                            <Button Margin="5,10,5,10" Content="Day" Command="{Binding DayCommand}"/>
+                            <Button Name="chooseWeekButton" Click="chooseWeekButton_Click" Margin="5,10,5,10" Content="Week" Command="{Binding WeekCommand}"/>
                         </Grid>
                     
                         <Grid Grid.Row="2">
-                            <Button Margin="5,10,5,10" Content="Week" Command="{Binding WeekCommand}"/>
+                            <Button Name="chooseMonthButton" Click="chooseMonthButton_Click" Margin="5,10,5,10" Content="Month" Command="{Binding MonthCommand}"/>
                         </Grid>
                     
                         <Grid Grid.Row="3">
-                            <Button Margin="5,10,5,10" Content="Month" Command="{Binding MonthCommand}"/>
+                            <Button Name="chooseYearButton" Click="chooseYearButton_Click" Margin="5,10,5,10" Content="Year" Command="{Binding YearCommand}"/>
                         </Grid>
                     
                         <Grid Grid.Row="4">
-                            <Button Margin="5,10,5,10" Content="Year" Command="{Binding YearCommand}"/>
+                            <Button Name="chooseAllIntervalButton" Click="chooseAllIntervalButton_Click"  Margin="5,10,5,10" Content="All" Command="{Binding AllIntervalCommand}"/>
                         </Grid>
+                    
                     
                         <Grid Grid.Row="5">
-                            <Button Margin="5,10,5,10" Content="All" Command="{Binding AllIntervalCommand}"/>
+                            <Button Name="chooseAnyDateButton" Click="chooseAnyDateButton_Click" Margin="5,10,5,10" Content="Find for date" Command="{Binding ChosenDateCommand}"/>
                         </Grid>
-                    
+
                         <Grid Grid.Row="6">
-                            <Button Margin="5,10,5,10" Content="Interval"/>
+                            <DatePicker Name="datePicker" SelectedDate="{Binding ChosenDate}"/>
                         </Grid>
-                    
-                        <Grid Grid.Row="7">
-                            <Button Margin="5,10,5,10" Content="Choose Date"/>
-                        </Grid>
-                    
-                    
+                        
                     </Grid>
 
 
-                    <StackPanel.Triggers>
-
-                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard Name="dateIntervalStoryBoard">
-
-                                    <Storyboard Timeline.DesiredFrameRate="100">
-                                        <DoubleAnimation Storyboard.TargetProperty="Width"
-                                                         From="20" To="120" AutoReverse="False"
-                                                         Duration="0:0:0.3" DecelerationRatio="1"/>
-                                    </Storyboard>
-                            
-                                </BeginStoryboard>    
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-
-                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                            <StopStoryboard BeginStoryboardName="dateIntervalStoryBoard"/>
-                        </EventTrigger>
-                        
-                    </StackPanel.Triggers>
-                
-                
                 
                 </StackPanel> <!-- Date Stack Panel(Left) -->
 
             </Grid>
-
-            <!-- Settings(Right) -->
-            <StackPanel Width="0" Height="0"></StackPanel>
-            <!-- Settings(Right) -->
-
-
 
         </Grid>
         
