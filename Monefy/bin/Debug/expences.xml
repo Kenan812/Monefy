@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfArrayOfExpence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfExpence>
+    <Expence xsi:type="CarExpence">
+      <TotalSum>100</TotalSum>
+      <ExecutionDate>2021-08-04T19:28:33.3906127+04:00</ExecutionDate>
+    </Expence>
+    <Expence xsi:type="CarExpence">
+      <TotalSum>200</TotalSum>
+      <ExecutionDate>2021-08-04T19:29:16.3595374+04:00</ExecutionDate>
+    </Expence>
+  </ArrayOfExpence>
+  <ArrayOfExpence>
+    <Expence xsi:type="ClothesExpence">
+      <TotalSum>100</TotalSum>
+      <ExecutionDate>2021-08-04T19:29:10.6662943+04:00</ExecutionDate>
+    </Expence>
+  </ArrayOfExpence>
+  <ArrayOfExpence>
+    <Expence xsi:type="CommunicationsExpence">
+      <TotalSum>123</TotalSum>
+      <ExecutionDate>2021-09-05T14:30:05.7548765+04:00</ExecutionDate>
+    </Expence>
+  </ArrayOfExpence>
+  <ArrayOfExpence />
+  <ArrayOfExpence>
+    <Expence xsi:type="EntertainmentExpence">
+      <TotalSum>1926</TotalSum>
+      <ExecutionDate>2021-09-05T14:19:36.4938947+04:00</ExecutionDate>
+    </Expence>
+  </ArrayOfExpence>
+  <ArrayOfExpence />
+  <ArrayOfExpence>
+    <Expence xsi:type="GiftsExpence">
+      <TotalSum>55</TotalSum>
+      <ExecutionDate>2021-09-05T14:19:10.9425031+04:00</ExecutionDate>
+    </Expence>
+  </ArrayOfExpence>
+  <ArrayOfExpence>
+    <Expence xsi:type="HealthExpence">
+      <TotalSum>130</TotalSum>
+      <ExecutionDate>2021-08-05T17:28:18.6812877+04:00</ExecutionDate>
+    </Expence>
+  </ArrayOfExpence>
+  <ArrayOfExpence>
+    <Expence xsi:type="HouseExpence">
+      <TotalSum>500</TotalSum>
+      <ExecutionDate>2021-08-04T20:25:54.4150271+04:00</ExecutionDate>
+    </Expence>
+  </ArrayOfExpence>
+  <ArrayOfExpence>
+    <Expence xsi:type="PetsExpence">
+      <TotalSum>999</TotalSum>
+      <ExecutionDate>2021-09-05T14:29:34.5692618+04:00</ExecutionDate>
+    </Expence>
+  </ArrayOfExpence>
+  <ArrayOfExpence />
+  <ArrayOfExpence />
+  <ArrayOfExpence />
+  <ArrayOfExpence />
+</ArrayOfArrayOfExpence>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfArrayOfIncome xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfIncome>
+    <Income xsi:type="DepositIncome">
+      <TotalIncome>3232</TotalIncome>
+      <ExecutionDate>2021-09-05T14:22:31.1598485+04:00</ExecutionDate>
+    </Income>
+  </ArrayOfIncome>
+  <ArrayOfIncome>
+    <Income xsi:type="SalaryIncome">
+      <TotalIncome>1500</TotalIncome>
+      <ExecutionDate>2021-08-05T16:27:29.2560325+04:00</ExecutionDate>
+    </Income>
+    <Income xsi:type="SalaryIncome">
+      <TotalIncome>655</TotalIncome>
+      <ExecutionDate>2021-09-05T14:19:20.6715963+04:00</ExecutionDate>
+    </Income>
+  </ArrayOfIncome>
+  <ArrayOfIncome>
+    <Income xsi:type="SavingsIncome">
+      <TotalIncome>333</TotalIncome>
+      <ExecutionDate>2021-09-05T14:29:43.0859047+04:00</ExecutionDate>
+    </Income>
+  </ArrayOfIncome>
+</ArrayOfArrayOfIncome>
