@@ -86,6 +86,19 @@
     <Compile Include="Model\Incomes\SalaryIncome.cs" />
     <Compile Include="Model\Incomes\SavingsIncome.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\App.g.cs" />
+    <Compile Include="obj\Debug\App.g.i.cs" />
+    <Compile Include="obj\Debug\MainWindow.g.i.cs" />
+    <Compile Include="obj\Debug\Monefy_Content.g.i.cs" />
+    <Compile Include="obj\Debug\View\MainWindow.g.i.cs" />
+    <Compile Include="obj\Debug\View\NewExpenceWindow.g.i.cs" />
+    <Compile Include="obj\Debug\View\NewIncomeWindow.g.i.cs" />
+    <Compile Include="obj\Release\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="obj\Release\App.g.cs" />
+    <Compile Include="obj\Release\View\MainWindow.g.cs" />
+    <Compile Include="obj\Release\View\NewExpenceWindow.g.cs" />
+    <Compile Include="obj\Release\View\NewIncomeWindow.g.cs" />
     <Compile Include="Services\Command.cs" />
     <Compile Include="Services\CommandDelegates\DelegateCommand.cs" />
     <Compile Include="Services\FileServices\IFileService.cs" />
@@ -131,10 +144,26 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="obj\Debug\Monefy.g.resources" />
+    <EmbeddedResource Include="obj\Debug\Monefy.Properties.Resources.resources" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\Monefy.exe.config" />
+    <None Include="bin\Debug\Pictures - Shortcut.lnk" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\Monefy.csproj.CopyComplete" />
+    <None Include="obj\Debug\Monefy.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\Monefy.csproj.GenerateResource.cache" />
+    <None Include="obj\Debug\Monefy.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\Monefy_MarkupCompile.cache" />
+    <None Include="obj\Debug\Monefy_MarkupCompile.i.cache" />
+    <None Include="obj\Debug\Monefy_MarkupCompile.i.lref" />
+    <None Include="obj\Debug\Monefy_MarkupCompile.lref" />
+    <None Include="obj\Release\Monefy_MarkupCompile.cache" />
+    <None Include="obj\Release\Monefy_MarkupCompile.lref" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -142,6 +171,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="obj\Debug\Monefy.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\Monefy.exe" />
+    <Content Include="obj\Debug\Monefy.pdb" />
+    <Resource Include="bin\Debug\expences.xml" />
+    <Resource Include="bin\Debug\Images\carIcon.png" />
+    <Resource Include="bin\Debug\Images\cashIcon.png" />
+    <Resource Include="bin\Debug\Images\clothesIcon.png" />
+    <Resource Include="bin\Debug\Images\communicationsIcon.png" />
+    <Resource Include="bin\Debug\Images\depositIcon.png" />
+    <Resource Include="bin\Debug\Images\eatingOutIcon.png" />
+    <Resource Include="bin\Debug\Images\entertainmentIcon.png" />
+    <Resource Include="bin\Debug\Images\foodIcon.png" />
+    <Resource Include="bin\Debug\Images\giftsIcon.png" />
+    <Resource Include="bin\Debug\Images\healthIcon.png" />
+    <Resource Include="bin\Debug\Images\houseIcon.png" />
+    <Resource Include="bin\Debug\Images\petIcon.png" />
+    <Resource Include="bin\Debug\Images\salaryIcon.png" />
+    <Resource Include="bin\Debug\Images\savingsIcon.png" />
+    <Resource Include="bin\Debug\Images\sportsIcon.png" />
+    <Resource Include="bin\Debug\Images\taxiIcon.png" />
+    <Resource Include="bin\Debug\Images\toiletryIcon.png" />
+    <Resource Include="bin\Debug\Images\transportIcon.png" />
+    <Resource Include="bin\Debug\incomes.xml" />
+    <Content Include="bin\Debug\Monefy.exe" />
+    <Content Include="bin\Debug\Monefy.pdb" />
+    <Content Include="bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll" />
+    <Content Include="bin\Debug\WPFToolkit.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
