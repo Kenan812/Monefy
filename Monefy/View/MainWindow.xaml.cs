@@ -169,6 +169,9 @@ namespace Monefy.View
             NewExpenceWindow newExpenceWindow = new NewExpenceWindow(userViewModel);
 
             newExpenceWindow.ShowDialog();
+
+            userViewModel.UpdateForAllIntervals();
+            dateLabel.Content = "All Period";
         }
 
         private void incomeButton_Click(object sender, RoutedEventArgs e)
@@ -176,6 +179,9 @@ namespace Monefy.View
             NewIncomeWindow newIncomeWindow = new NewIncomeWindow(userViewModel);
 
             newIncomeWindow.ShowDialog();
+
+            userViewModel.UpdateForAllIntervals();
+            dateLabel.Content = "All Period";
         }
 
         #endregion

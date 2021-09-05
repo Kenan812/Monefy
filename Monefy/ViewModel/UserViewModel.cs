@@ -529,6 +529,14 @@ namespace Monefy.ViewModel
 
 
 
+        public void UpdateForAllIntervals()
+        {
+            SetListForAllPeriods();
+            SetPercentagesExpences();
+            SetTotalIncome();
+        }
+
+
         #region Choosing Time Interval Commands
 
 
